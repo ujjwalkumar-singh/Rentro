@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .btn-search{
+      background-color:#fe424d;
+      color: white;
+      border-radius: 25px;
+      padding: 0 1rem 0 1rem;
+    }
+    .btn-search:hover{
+      background-color:#fe424d;
+      color: white;
+    }
+    .btn-search i{
+      display: inline;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  
+  <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <i class="fa-regular fa-compass"></i></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <!-- <a class="nav-link " aria-current="page" href="/">Home</a> -->
+          <a class="nav-link" href="/listings">Explore</a>
+
+          <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a> -->
+        </div>
+        <div class="navbar-nav" style="margin-left: 350px;">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search Destination" aria-label="Search" />
+            <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+          </form>
+        </div>
+        
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ms-auto">
+              <a class="nav-link" href="/listings/new">Add new Listing</a>
+              <%if(!currentUser){%>
+                <a class="nav-link " aria-current="page" href="/signup"><b>SignUp</b></a>
+                <a class="nav-link" href="/login"><b>log In</b></a>
+                <%}%>
+                  <%if(currentUser){%>
+                    <a class="nav-link" href="/logout"><b>Log Out</b></a>
+                    <%}%>
+            </div>
+          </div>
+        
+      </div>
+  </nav>
+</body>
+
+</html>

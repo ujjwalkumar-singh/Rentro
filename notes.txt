@@ -1,0 +1,24 @@
+1.express router
+2.cookies and signed cookies 
+
+
+1.mogoose post middleware used in listing model
+listingSchema.post("findOneAndDelete", async (listing) => {
+    if (listing) {
+        await Review.deleteMany({ _id: { $in: listing.reviews } })
+    }
+});
+
+// app.get("/test",async (req,res)=>{
+//     let sample=new Listing({
+//         title:"my home",
+//         description:"hii",
+//         price:200,
+//         location:"patna",
+//         country:"india"
+//     });
+//     await sample.save();
+//     res.send("sucess testing");
+// });
+
+3.express session,connect-flash,statefull,stateless
