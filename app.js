@@ -58,7 +58,7 @@ app.get("/", async(req, res) => {
 const store=MongoStore.create({
     mongoUrl:MONGO_URI,
     crypto: {
-    secret: 'mycode'
+    secret: process.env.SECRET
   },
   touchAfter:24*60*60
 })
@@ -69,7 +69,7 @@ store.on("error",()=>{
 
 const sessionOptions={
     store,
-    secret:"mycode",
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
     cookie:{
