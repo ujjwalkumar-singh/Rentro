@@ -10,7 +10,7 @@ module.exports.getForm = async (req, res) => {
 }
 module.exports.show = async (req, res) => {
     const { id } = req.params;
-    console.log(id);
+    // console.log(id);
     const item = await Listing.findById(id).
         populate({
             path: "reviews", populate: {
@@ -19,7 +19,7 @@ module.exports.show = async (req, res) => {
         }).
         populate("owner")
     if (item === null) {
-        req.flash("error", "no such listing exist!");
+        req.flash("error", "No such listing exist!");
         return res.redirect(`/listings`);
     }
 
@@ -36,21 +36,19 @@ module.exports.createlisting = async (req, res) => {
     item.owner = req.user._id;
     item.image = { url, filename }
     await item.save()
-    req.flash("success", "new listing created!");
+    req.flash("success", "New listing created!");
     res.redirect("/listings")
-
 }
 
 module.exports.getEditForm = async (req, res) => {
     const { id } = req.params;
     const item = await Listing.findById(id)
     if (item === null) {
-        req.flash("error", "no such listing exist!");
+        req.flash("error", "No such listing exist!");
         return res.redirect(`/listings`);
     }
     let originalImageurl=item.image.url;
-    console.log(originalImageurl);
-    
+    // console.log(originalImageurl);
     originalImageurl=originalImageurl.replace("/upload","/upload/h_100,w_200/")
     res.render("listings/edit.ejs", { item,originalImageurl })
 }
@@ -68,7 +66,7 @@ module.exports.update = async (req, res) => {
     //      req.flash("error","no such listing exist!");
     //      return  res.redirect(`/listings`);
     // }
-    req.flash("success", "listing updated successfully!");
+    req.flash("success", "Listing updated successfully!");
     return res.redirect(`/listings/${id}`);
 }
 
@@ -76,9 +74,9 @@ module.exports.deletelisting = async (req, res) => {
     const { id } = req.params;
     const item = await Listing.findByIdAndDelete(id);
     if (item === null) {
-        req.flash("error", "no such listing exist!");
+        req.flash("error", "No such listing exist!");
         return res.redirect(`/listings`);
     }
-    req.flash("success", "listing deleted successfully!");
+    req.flash("success", "Listing deleted successfully!");
     res.redirect(`/listings`);
 }
