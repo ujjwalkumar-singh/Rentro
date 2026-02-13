@@ -26,7 +26,7 @@
                     <div class="mb-3 col-md-4">
                         <label for="price" class="form-label">Price</label>
                         <input name="listing[price]" placeholder="enter price" type="text" class="form-control"
-                            required>
+                        required>
                         <div class="invalid-feedback">
                             enter price
                         </div>
@@ -34,7 +34,7 @@
                     <div class="mb-3 col-md-8">
                         <label for="location" class="form-label"> Location</label>
                         <input name="listing[location]" placeholder="enter location" type="text" class="form-control"
-                            required>
+                        required>
                         <div class="invalid-feedback">
                             enter location
                         </div>
@@ -43,10 +43,25 @@
                 <div class="mb-3 ">
                     <label for="country" class="form-label">Country</label>
                     <input name="listing[country]" placeholder="enter country" type="text" class="form-control"
-                        required>
+                    required>
                     <div class="invalid-feedback">
                         enter country
                     </div>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Select Category</label>
+                    <select name="listing[category]" class="form-control" required>
+                        <option>trending</option>
+                        <option>rooms</option>
+                        <option>cities</option>
+                        <option>amazingpools</option>
+                        <option>beach</option>
+                        <option>mountains</option>
+                        <option>nativeBuffer</option>
+                        <option>luxury</option>
+                         <option>family</option>
+                        <option>pet</option>
+                    </select>
                 </div>
 
                 <button class="btn btn-dark add-btn">Add</button>

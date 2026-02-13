@@ -4,7 +4,7 @@ const Listing = require("../models/listing.model.js")
 const wrapAsync = require("../utils/wrapAsync.js")
 const ExpressError = require("../utils/ExpressError.js")
 const {isLoggedIn,validateListing,isAllowed} = require("../middleware/authMiddleware.js")
-const {index,getForm,show,createlisting,getEditForm,update,deletelisting}=require("../controllers/listing.controller.js")
+const {index,getForm,show,createlisting,getEditForm,update,deletelisting,CategorisedIndex,destinationIndex}=require("../controllers/listing.controller.js")
 const multer  = require('multer')
 const {storage} =require("../cloudConfig.js")
 const upload = multer({ storage })
@@ -19,6 +19,9 @@ router.route("/")
 
 //NEW ROUTE FOR GETTING FORM
 router.get("/new",isLoggedIn, wrapAsync(getForm))
+router.get("/filter",isLoggedIn, wrapAsync(CategorisedIndex))
+router.get("/loc",isLoggedIn, wrapAsync(destinationIndex))
+
 
 //SHOW ROUTE
 router.route("/:id")
