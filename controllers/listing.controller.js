@@ -32,7 +32,7 @@ module.exports.createlisting = async (req, res) => {
     let url = req.file.path
     let filename = req.file.filename
     const item = new Listing(req.body.listing)
-    console.log(res.locals.currentUser);
+    // console.log(res.locals.currentUser);
     item.owner = req.user._id;
     item.image = { url, filename }
     await item.save()

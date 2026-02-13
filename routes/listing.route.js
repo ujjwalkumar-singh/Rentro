@@ -1,4 +1,4 @@
-const express=require("express")
+const express = require("express")
 const router = express.Router();
 const Listing = require("../models/listing.model.js")
 const wrapAsync = require("../utils/wrapAsync.js")
