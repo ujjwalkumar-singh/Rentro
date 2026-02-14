@@ -5,6 +5,10 @@
         <button>Create New</button>
     </form> -->
     <style>
+        body {
+            overflow-x: hidden;
+        }
+
         #filters {
 
             display: flex;
@@ -33,6 +37,20 @@
             display: none;
         }
 
+        @media (max-width: 768px) {
+            .tax-toggle {
+                margin: 1rem auto;
+                padding: 10px;
+                border: 2px solid black;
+                border-radius: 1rem;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: fit-content;
+            }
+        }
+
         .tax-toggle {
             margin-top: 1.5rem;
             padding: 10px;
@@ -42,12 +60,17 @@
             margin-left: 10rem;
             display: flex;
             align-items: center;
+            margin-top: 1rem;
         }
 
-        .top-item {
+
+        /* .top-item {
             display: flex;
-        }
-        .empty-alert{
+        } */
+
+
+
+        /* .empty-alert {
             border-radius: 20px;
             padding: 20px;
             border: 2px solid black;
@@ -55,61 +78,83 @@
             margin-left: 390px;
             background-color: #fe424d;
             color: aqua;
+        } */
+        .empty-alert {
+            border-radius: 20px;
+            padding: 20px;
+            border: 2px solid black;
+            margin: 3rem auto;
+            background-color: #fe424d;
+            color: white;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .empty-alert-2 {
+            border-radius: 20px;
+            padding: 20px;
+            border: 2px solid black;
+            margin: 3rem auto;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+
+        #filters {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            width: 100%;
+            max-width: 100%;
+            white-space: nowrap;
+            padding: 0.5rem 0;
+        }
+
+        #filters::-webkit-scrollbar {
+            display: none;
+            /* Chrome */
+        }
+
+        .filter {
+            flex: 0 0 auto;
+        }
+
+
+        .top-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .top-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                /* width: 100%; */
+            }
+
+        }
+
+        /* Smooth transition */
+        .filter {
+            transition: 0.2s ease-in-out;
+        }
+
+        /* Active state */
+        .active-filter i,
+        .active-filter p {
+            color: #fe424d !important;
+            opacity: 1;
+            font-weight: 600;
         }
     </style>
     <div>
         <div class="top-item">
             <div id="filters">
-                <!-- <div class="filter ">
-                <div><i class="fa-solid fa-fire"></i></div>
-                <p>Trending</p>
-            </div>
-            <div class="filter ">
-                <div><i class="fa-solid fa-mountain-city"></i></div>
-                <p>Cities</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-mountain"></i></div>
-                <p>Mountains</p>
-            </div>
-            <div class="filter ">
-                <div><i class="fa-solid fa-cow"></i></div>
-                <p>Farms</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-person-swimming"></i></div>
-                <p>Amazing pools</p>
-            </div>
-            <div class="filter ">
-                <div><i class="fa-solid fa-umbrella-beach"></i></div>
-                <p>Beach</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-mountain"></i></div>
-                <p>Mountains</p>
-            </div>
-            <div class="filter ">
-                <div><i class="fa-solid fa-leaf"></i></div>
-                <p>Nature</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-city"></i></div>
-                <p>City</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-gem"></i></i></div>
-                <p>Luxury</p>
-            </div>
-            <div class="filter ">
-                <div><i class="fa-solid fa-children"></i></div>
-                <p>Family</p>
-            </div> 
-            <a href="/listings/filter?category=rooms" class="filter">
-                
-                <div><i class="fa-solid fa-bed"></i></div>
-                <p>Rooms</p>
-
-            </a> -->
                 <% const categories=[ { name: "Trending" , value: "trending" , icon: "fa-fire" }, { name: "Rooms" ,
                     value: "rooms" , icon: "fa-bed" }, { name: "Cities" , value: "cities" , icon: "fa-mountain-city" },
                     { name: "Mountains" , value: "mountains" , icon: "fa-mountain" }, { name: "Amazing Pools" ,
@@ -119,7 +164,8 @@
                     icon: "fa-children" }, { name: "Pet Friendly" , value: "pet" , icon: "fa-dog" } ]; %>
 
                     <% categories.forEach(cat=> { %>
-                        <a href="/listings/filter?category=<%= cat.value %>" class="filter">
+                        <a href="/listings/filter?category=<%= cat.value %>"
+                            class="filter <%= selectedCategory === cat.value ? 'active-filter' : '' %>">
                             <div>
                                 <i class="fa-solid <%= cat.icon %>"></i>
                             </div>
@@ -135,15 +181,17 @@
             <div class="tax-toggle">
                 <div class="form-check form-switch form-check-reverse">
                     <input class="form-check-input" type="checkbox" id="switchCheckReverse">
-                    <label class="form-check-label" for="switchCheckReverse">Display Total after taxes</label>
+                    <label class="form-check-label" for="switchCheckReverse">Display Total Price After Taxes</label>
                 </div>
             </div>
 
         </div>
         <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+            <!-- <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 mt-3"></div> -->
             <% if (list.length==0) { %>
                 <h2 class="empty-alert">There is no such place which you are finding...</h2>
-            <% } %>
+                <h2 class="empty-alert-2"> Try searching with different keyword or category</h2>
+                <% } %>
 
                     <%for(let each of list){%>
                         <a href="/listings/<%=each.id%>" class="listing-links">

@@ -3,21 +3,21 @@ const Listing = require("../models/listing.model.js")
 module.exports.index = async (req, res) => {
     const list = await Listing.find({})
     // console.log(list);
-    res.render("listings/index.ejs", { list })
+    res.render("listings/index.ejs", { list,selectedCategory: null  })
 }
 module.exports.CategorisedIndex = async (req, res) => {
     let { category } = req.query;
     // console.log(category);
     let list = await Listing.find({ category: category });
     // console.log(list);
-    res.render("listings/index.ejs", { list })
+    res.render("listings/index.ejs", { list,selectedCategory: category   })
 }
 module.exports.destinationIndex = async (req, res) => {
     let { location } = req.query;
     // console.log(category);
     let list = await Listing.find({ location: location });
     // console.log(list);
-    res.render("listings/index.ejs", { list })
+    res.render("listings/index.ejs", { list,selectedCategory: null })
 }
 module.exports.getForm = async (req, res) => {
     res.render("listings/new.ejs")

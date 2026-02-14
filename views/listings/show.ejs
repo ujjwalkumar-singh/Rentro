@@ -47,17 +47,64 @@
 
         </ul> -->
 
-        <div style=" display: flex; justify-content: space-between;width: 50%; margin-left: 220px;">
+        <!-- <div style=" display: flex; justify-content: space-between;width: 50%; margin-left: 220px;">
             <form action="/listings/<%=item._id%>/edit" method="GET">
                 <button class="btn btn-warning">Upadate details</button>
             </form>
             <form method="POST" action="/listings/<%=item._id%>?_method=DELETE">
                 <button class="btn btn-danger">Delete</button>
             </form>
+        </div> -->
+        <div class="col-12 col-md-6 offset-md-2 d-flex flex-column flex-md-row justify-content-between gap-2 mt-3">
+            <form action="/listings/<%=item._id%>/edit" method="GET" class="w-100">
+                <button class="btn btn-warning w-100">Update Details</button>
+            </form>
+
+            <form method="POST" action="/listings/<%=item._id%>?_method=DELETE" class="w-100">
+                <button class="btn btn-danger w-100">Delete</button>
+            </form>
         </div>
 
 
+
         <div class="col-8 offset-2 mb-3 mt-3">
+            <p><b>Visitor's Reviews</b></p>
+            <div class="row">
+                <% for( ele of item.reviews) { %>
+                    <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                        <div class="card w-100" style="max-width: 380px;">
+                            <div class="card-body p-4 ">
+
+                                <!-- Top Row: Name + Delete -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">
+                                        <%=ele.owner.username%>
+                                    </h5>
+
+                                    <form method="POST"
+                                        action="/listings/<%=item._id%>/reviews/<%=ele._id%>?_method=DELETE">
+
+                                        <button class="btn btn-outline-danger btn-sm px-2">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+
+                                <!-- Comment -->
+                                <p class="card-text mt-2">
+                                    <%=ele.comment%>
+                                </p>
+
+                                <!-- Rating -->
+                                <p class="starability-result" data-rating="<%=ele.rating%>"></p>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <% } %>
+            </div>
             <hr>
             <h4>Leave a review</h4>
             <form action="/listings/<%=item._id%>/reviews" method="POST" class="needs-validation" novalidate>
@@ -88,35 +135,9 @@
                         please sumbit some comment
                     </div>
                 </div>
-                <button class="btn btn-outline-dark mt-3">Submit</button>
+                <button class="btn btn-outline-success mt-3">Submit</button>
             </form>
         </div>
         <hr />
 
-        <p><b>All Reviews</b></p>
-        <div class="row">
-            <% for( ele of item.reviews) { %>
-                <div class="card col-5 mb-3 ms-3">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <%=ele.owner.username%>
-                        </h5>
-                        <p class="card-text">
-                            <%=ele.comment%>
-                        </p>
-
-                        <!-- <p class="card-text">
-                            <%=ele.rating%> Stars
-                        </p> -->
-                        <p class="starability-result " data-rating="<%=ele.rating%>">
-                          
-                        </p>
-                    </div>
-                    <form class="mb-3" method="POST"
-                        action="/listings/<%=item._id%>/reviews/<%=ele._id%>?_method=DELETE">
-                        <button class="btn btn-sm btn-dark ">Delete</button>
-                    </form>
-                </div>
-                <% } %>
-        </div>
     </div>

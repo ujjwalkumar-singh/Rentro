@@ -19,8 +19,8 @@ router.route("/")
 
 //NEW ROUTE FOR GETTING FORM
 router.get("/new",isLoggedIn, wrapAsync(getForm))
-router.get("/filter",isLoggedIn, wrapAsync(CategorisedIndex))
-router.get("/loc",isLoggedIn, wrapAsync(destinationIndex))
+router.get("/filter", wrapAsync(CategorisedIndex))
+router.get("/loc", wrapAsync(destinationIndex))
 
 
 //SHOW ROUTE
